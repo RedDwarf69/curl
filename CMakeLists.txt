@@ -46,6 +46,13 @@ include(CheckCCompilerFlag)
 
 project(CURL C)
 
+include(GNUInstallDirs)
+
+file(RELATIVE_PATH pkgconf_to_prefix "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig" "${CMAKE_INSTALL_PREFIX}")
+set(pkgconf_to_exec_prefix "${pkgconf_to_prefix}")
+file(RELATIVE_PATH exec_prefix_to_libdir "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_FULL_LIBDIR}")
+file(RELATIVE_PATH prefix_to_includedir "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
+
 file(STRINGS ${CURL_SOURCE_DIR}/include/curl/curlver.h CURL_VERSION_H_CONTENTS REGEX "#define LIBCURL_VERSION( |_NUM )")
 string(REGEX MATCH "#define LIBCURL_VERSION \"[^\"]*"
   CURL_VERSION ${CURL_VERSION_H_CONTENTS})
