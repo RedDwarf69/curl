@@ -278,6 +278,7 @@ if(WIN32)
 endif()
 
 if(ENABLE_THREADED_RESOLVER)
+  set(THREADS_PREFER_PTHREAD_FLAG TRUE)
   find_package(Threads REQUIRED)
   if(WIN32)
     set(USE_THREADS_WIN32 ON)
